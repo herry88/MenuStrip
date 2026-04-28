@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,13 +15,18 @@ namespace MenuStrip
         SqlConnection conn = new SqlConnection(
             @"Data Source=.\SQLEXPRESS;Initial Catalog=cobasqlserver;Integrated Security=True;TrustServerCertificate=True"
         );
-
         public FormBarang()
         {
             InitializeComponent();
         }
 
-        //tampil data 
+        private void FormBarang_Load(object sender, EventArgs e)
+        {
+            TampilData();
+            DesainUI();
+            ClearForm();
+        }
+
         private void TampilData()
         {
             try
@@ -37,166 +42,130 @@ namespace MenuStrip
             }
         }
 
-        private void ClearForm()
-        {
-            txtNamaBarang.Text = "";
-            txtHarga.Text = "";
-            txtStock.Text = "";
-        }
-
-        //setEnable
-        private void SetEnable(bool status)
-        {
-            txtNamaBarang.Enabled = status;
-            txtHarga.Enabled = status;
-            txtStock.Enabled = status;
-        }
-
-        private void FormBarang_Load(object sender, EventArgs e)
-        {
-            TampilData();
-            ClearForm();
-            DesainUI();
-            txtIdbarang.ReadOnly = true;
-
-        }
         private void DesainUI()
         {
-            this.BackColor = Color.WhiteSmoke;
-            this.Font = new Font("Segoe UI", 10);
+            this.BackColor = Color.White;
+            this.Font = new Font("Segoe UI", 9.5f);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
             dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
-
+            dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            
+            // Header Style - Blue matching Dashboard
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185);
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dataGridView1.ColumnHeadersHeight = 35;
 
+            // Cell Style
             dataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10);
             dataGridView1.RowTemplate.Height = 30;
-
-            btnSimpan.BackColor = Color.SeaGreen;
-            btnSimpan.ForeColor = Color.White;
-
-            btnEdit.BackColor = Color.DodgerBlue;
-            btnEdit.ForeColor = Color.White;
-
-            btnDelete.BackColor = Color.Firebrick;
-            btnDelete.ForeColor = Color.White;
-
-            btnTutup.BackColor = Color.Gray;
-            btnTutup.ForeColor = Color.White;
-
-            btnSimpan.FlatStyle = FlatStyle.Flat;
-            btnEdit.FlatStyle = FlatStyle.Flat;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnTutup.FlatStyle = FlatStyle.Flat;
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 249, 250);
         }
 
-        //tombol simpan
+        private void ClearForm()
+        {
+            txtIdbarang.Clear();
+            txtNamaBarang.Clear();
+            txtHarga.Clear();
+            txtStock.Clear();
+            btnSimpan.Enabled = true;
+            btnEdit.Enabled = false;
+            btnHapus.Enabled = false;
+        }
+
         private void btnSimpan_Click(object sender, EventArgs e)
         {
-            if (txtNamaBarang.Text == "" || txtHarga.Text == "" || txtStock.Text == "")
+            if (string.IsNullOrEmpty(txtNamaBarang.Text) || string.IsNullOrEmpty(txtHarga.Text))
             {
-                MessageBox.Show("Data Belum Lengkap");
+                MessageBox.Show("Nama Barang dan Harga harus diisi!");
                 return;
             }
+
             try
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(
-                    "INSERT INTO Barang (NamaBarang, Harga, Stok) VALUES (@namaBarang, @harga, @stock)",
+                    "INSERT INTO Barang (NamaBarang, Harga, Stok) VALUES (@nama, @harga, @stok)",
                     conn
                 );
-
-                //deklarasi form 
-                cmd.Parameters.AddWithValue("@namaBarang", txtNamaBarang.Text);
+                cmd.Parameters.AddWithValue("@nama", txtNamaBarang.Text);
                 cmd.Parameters.AddWithValue("@harga", txtHarga.Text);
-                cmd.Parameters.AddWithValue("@stock", txtStock.Text);
+                cmd.Parameters.AddWithValue("@stok", txtStock.Text);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();
-                MessageBox.Show("Data Berhasil Disimpan");
-
-
-                TampilData();//refresh data
-
-                ClearForm(); //clear form
-
+                
+                MessageBox.Show("Data Barang berhasil disimpan");
+                TampilData();
+                ClearForm();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void btnTutup_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin menutup form?",
-                                                  "Konfirmasi Tutup",
-                                                  MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Question
-                                                  );
-            if (result == DialogResult.Yes)
-            {
-                this.Close();
+                conn.Close();
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
-            if (txtIdbarang.Text == "")
-            {
-                MessageBox.Show("Pilih data yang akan diupdate!");
-                return;
-            }
-
-            if (txtNamaBarang.Text == "" || txtHarga.Text == "" || txtStock.Text == "")
-            {
-                MessageBox.Show("Data belum lengkap!");
-                return;
-            }
-
             try
             {
                 conn.Open();
-
                 SqlCommand cmd = new SqlCommand(
-                    "UPDATE Barang SET NamaBarang=@namaBarang, Harga=@harga, Stok=@stock WHERE IdBarang=@idBarang",
+                    "UPDATE Barang SET NamaBarang=@nama, Harga=@harga, Stok=@stok WHERE IdBarang=@id",
                     conn
                 );
-
-                cmd.Parameters.AddWithValue("@idBarang", txtIdbarang.Text);
-                cmd.Parameters.AddWithValue("@namaBarang", txtNamaBarang.Text);
-                cmd.Parameters.AddWithValue("@harga", int.Parse(txtHarga.Text));
-                cmd.Parameters.AddWithValue("@stock", int.Parse(txtStock.Text));
+                cmd.Parameters.AddWithValue("@id", txtIdbarang.Text);
+                cmd.Parameters.AddWithValue("@nama", txtNamaBarang.Text);
+                cmd.Parameters.AddWithValue("@harga", txtHarga.Text);
+                cmd.Parameters.AddWithValue("@stok", txtStock.Text);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-                MessageBox.Show("Data berhasil diupdate");
-
+                MessageBox.Show("Data Barang berhasil diupdate");
                 TampilData();
                 ClearForm();
-                SetEnable(false);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
                 conn.Close();
             }
-
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Hapus data ini?", "Konfirmasi", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("DELETE FROM Barang WHERE IdBarang=@id", conn);
+                    cmd.Parameters.AddWithValue("@id", txtIdbarang.Text);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
 
+                    MessageBox.Show("Data Barang berhasil dihapus");
+                    TampilData();
+                    ClearForm();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    conn.Close();
+                }
+            }
+        }
+
+        private void btnTutup_Click(object sender, EventArgs e)
+        {
+            ClearForm();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -204,53 +173,14 @@ namespace MenuStrip
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
                 txtIdbarang.Text = row.Cells["IdBarang"].Value.ToString();
                 txtNamaBarang.Text = row.Cells["NamaBarang"].Value.ToString();
                 txtHarga.Text = row.Cells["Harga"].Value.ToString();
                 txtStock.Text = row.Cells["Stok"].Value.ToString();
 
-                SetEnable(true);
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (txtIdbarang.Text == "")
-            {
-                MessageBox.Show("Pilih Data Yang Akan Di Hapus");
-                return;
-            }
-
-            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?",
-                                                  "Konfirmasi Hapus",
-                                                  MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Question
-                                                  );
-            if (result == DialogResult.No)
-            {
-                return;
-            }
-            try
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(
-                    "DELETE FROM Barang WHERE IdBarang=@idBarang",
-                    conn
-                );
-
-                cmd.Parameters.AddWithValue("@idBarang", txtIdbarang.Text);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                MessageBox.Show("Data Berhasil Dihapus");
-                TampilData();
-                ClearForm();
-                SetEnable(true);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-                conn.Close();
+                btnSimpan.Enabled = false;
+                btnEdit.Enabled = true;
+                btnHapus.Enabled = true;
             }
         }
     }

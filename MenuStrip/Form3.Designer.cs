@@ -1,4 +1,4 @@
-﻿namespace MenuStrip
+namespace MenuStrip
 {
     partial class FormBarang
     {
@@ -28,158 +28,219 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblNamaBarang = new Label();
-            lblHarga = new Label();
-            lblStock = new Label();
+            pnlHeader = new Panel();
+            lblHeaderTitle = new Label();
+            dataGridView1 = new DataGridView();
+            label1 = new Label();
+            txtIdbarang = new TextBox();
             txtNamaBarang = new TextBox();
+            label2 = new Label();
             txtHarga = new TextBox();
+            label3 = new Label();
             txtStock = new TextBox();
+            label4 = new Label();
             btnSimpan = new Button();
             btnEdit = new Button();
-            btnDelete = new Button();
-            btnTutup = new Button();
-            dataGridView1 = new DataGridView();
-            lblid = new Label();
-            txtIdbarang = new TextBox();
+            btnHapus = new Button();
+            btnBatal = new Button();
+            pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // lblNamaBarang
+            // pnlHeader
             // 
-            lblNamaBarang.AutoSize = true;
-            lblNamaBarang.Location = new Point(12, 60);
-            lblNamaBarang.Name = "lblNamaBarang";
-            lblNamaBarang.Size = new Size(100, 20);
-            lblNamaBarang.TabIndex = 2;
-            lblNamaBarang.Text = "Nama Barang";
+            pnlHeader.BackColor = Color.FromArgb(41, 128, 185);
+            pnlHeader.Controls.Add(lblHeaderTitle);
+            pnlHeader.Dock = DockStyle.Top;
+            pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Size = new Size(882, 60);
+            pnlHeader.TabIndex = 0;
             // 
-            // lblHarga
+            // lblHeaderTitle
             // 
-            lblHarga.AutoSize = true;
-            lblHarga.Location = new Point(12, 108);
-            lblHarga.Name = "lblHarga";
-            lblHarga.Size = new Size(50, 20);
-            lblHarga.TabIndex = 3;
-            lblHarga.Text = "Harga";
+            lblHeaderTitle.AutoSize = true;
+            lblHeaderTitle.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
+            lblHeaderTitle.ForeColor = Color.White;
+            lblHeaderTitle.Location = new Point(12, 12);
+            lblHeaderTitle.Name = "lblHeaderTitle";
+            lblHeaderTitle.Size = new Size(167, 37);
+            lblHeaderTitle.TabIndex = 0;
+            lblHeaderTitle.Text = "Data Barang";
             // 
-            // lblStock
+            // dataGridView1
             // 
-            lblStock.AutoSize = true;
-            lblStock.Location = new Point(12, 167);
-            lblStock.Name = "lblStock";
-            lblStock.Size = new Size(45, 20);
-            lblStock.TabIndex = 4;
-            lblStock.Text = "Stock";
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(340, 80);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(520, 450);
+            dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10F);
+            label1.Location = new Point(20, 80);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 23);
+            label1.TabIndex = 2;
+            label1.Text = "ID Barang";
+            // 
+            // txtIdbarang
+            // 
+            txtIdbarang.BackColor = Color.FromArgb(236, 240, 241);
+            txtIdbarang.BorderStyle = BorderStyle.FixedSingle;
+            txtIdbarang.Location = new Point(20, 106);
+            txtIdbarang.Name = "txtIdbarang";
+            txtIdbarang.ReadOnly = true;
+            txtIdbarang.Size = new Size(300, 27);
+            txtIdbarang.TabIndex = 3;
             // 
             // txtNamaBarang
             // 
-            txtNamaBarang.Location = new Point(118, 57);
+            txtNamaBarang.BorderStyle = BorderStyle.FixedSingle;
+            txtNamaBarang.Location = new Point(20, 166);
             txtNamaBarang.Name = "txtNamaBarang";
-            txtNamaBarang.Size = new Size(125, 27);
+            txtNamaBarang.Size = new Size(300, 27);
             txtNamaBarang.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F);
+            label2.Location = new Point(20, 140);
+            label2.Name = "label2";
+            label2.Size = new Size(115, 23);
+            label2.TabIndex = 4;
+            label2.Text = "Nama Barang";
             // 
             // txtHarga
             // 
-            txtHarga.Location = new Point(118, 101);
+            txtHarga.BorderStyle = BorderStyle.FixedSingle;
+            txtHarga.Location = new Point(20, 226);
             txtHarga.Name = "txtHarga";
-            txtHarga.Size = new Size(125, 27);
-            txtHarga.TabIndex = 6;
+            txtHarga.Size = new Size(300, 27);
+            txtHarga.TabIndex = 7;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10F);
+            label3.Location = new Point(20, 200);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 23);
+            label3.TabIndex = 6;
+            label3.Text = "Harga";
             // 
             // txtStock
             // 
-            txtStock.Location = new Point(118, 160);
+            txtStock.BorderStyle = BorderStyle.FixedSingle;
+            txtStock.Location = new Point(20, 286);
             txtStock.Name = "txtStock";
-            txtStock.Size = new Size(125, 27);
-            txtStock.TabIndex = 7;
+            txtStock.Size = new Size(300, 27);
+            txtStock.TabIndex = 9;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10F);
+            label4.Location = new Point(20, 260);
+            label4.Name = "label4";
+            label4.Size = new Size(50, 23);
+            label4.TabIndex = 8;
+            label4.Text = "Stock";
             // 
             // btnSimpan
             // 
-            btnSimpan.Location = new Point(344, 15);
+            btnSimpan.BackColor = Color.FromArgb(46, 204, 113);
+            btnSimpan.FlatAppearance.BorderSize = 0;
+            btnSimpan.FlatStyle = FlatStyle.Flat;
+            btnSimpan.Font = new Font("Segoe UI Semibold", 10F);
+            btnSimpan.ForeColor = Color.White;
+            btnSimpan.Location = new Point(20, 340);
             btnSimpan.Name = "btnSimpan";
-            btnSimpan.Size = new Size(94, 29);
-            btnSimpan.TabIndex = 8;
-            btnSimpan.Text = "&Simpan";
-            btnSimpan.UseVisualStyleBackColor = true;
+            btnSimpan.Size = new Size(300, 40);
+            btnSimpan.TabIndex = 10;
+            btnSimpan.Text = "Simpan Data";
+            btnSimpan.UseVisualStyleBackColor = false;
             btnSimpan.Click += btnSimpan_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(344, 60);
+            btnEdit.BackColor = Color.FromArgb(52, 152, 219);
+            btnEdit.FlatAppearance.BorderSize = 0;
+            btnEdit.FlatStyle = FlatStyle.Flat;
+            btnEdit.Font = new Font("Segoe UI Semibold", 10F);
+            btnEdit.ForeColor = Color.White;
+            btnEdit.Location = new Point(20, 386);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(94, 29);
-            btnEdit.TabIndex = 9;
-            btnEdit.Text = "&Edit";
-            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Size = new Size(145, 40);
+            btnEdit.TabIndex = 11;
+            btnEdit.Text = "Update";
+            btnEdit.UseVisualStyleBackColor = false;
             btnEdit.Click += btnEdit_Click;
             // 
-            // btnDelete
+            // btnHapus
             // 
-            btnDelete.Location = new Point(344, 108);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(94, 29);
-            btnDelete.TabIndex = 10;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
+            btnHapus.BackColor = Color.FromArgb(231, 76, 60);
+            btnHapus.FlatAppearance.BorderSize = 0;
+            btnHapus.FlatStyle = FlatStyle.Flat;
+            btnHapus.Font = new Font("Segoe UI Semibold", 10F);
+            btnHapus.ForeColor = Color.White;
+            btnHapus.Location = new Point(175, 386);
+            btnHapus.Name = "btnHapus";
+            btnHapus.Size = new Size(145, 40);
+            btnHapus.TabIndex = 12;
+            btnHapus.Text = "Hapus";
+            btnHapus.UseVisualStyleBackColor = false;
+            btnHapus.Click += btnDelete_Click;
             // 
-            // btnTutup
+            // btnBatal
             // 
-            btnTutup.Location = new Point(344, 154);
-            btnTutup.Name = "btnTutup";
-            btnTutup.Size = new Size(94, 33);
-            btnTutup.TabIndex = 11;
-            btnTutup.Text = "Tutup";
-            btnTutup.UseVisualStyleBackColor = true;
-            btnTutup.Click += btnTutup_Click;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 250);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(725, 188);
-            dataGridView1.TabIndex = 13;
-            dataGridView1.CellClick += dataGridView1_CellClick;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // lblid
-            // 
-            lblid.AutoSize = true;
-            lblid.Location = new Point(12, 19);
-            lblid.Name = "lblid";
-            lblid.Size = new Size(69, 20);
-            lblid.TabIndex = 14;
-            lblid.Text = "idBarang";
-            // 
-            // txtIdbarang
-            // 
-            txtIdbarang.Location = new Point(118, 12);
-            txtIdbarang.Name = "txtIdbarang";
-            txtIdbarang.Size = new Size(125, 27);
-            txtIdbarang.TabIndex = 15;
+            btnBatal.BackColor = Color.FromArgb(149, 165, 166);
+            btnBatal.FlatAppearance.BorderSize = 0;
+            btnBatal.FlatStyle = FlatStyle.Flat;
+            btnBatal.Font = new Font("Segoe UI Semibold", 10F);
+            btnBatal.ForeColor = Color.White;
+            btnBatal.Location = new Point(20, 432);
+            btnBatal.Name = "btnBatal";
+            btnBatal.Size = new Size(300, 40);
+            btnBatal.TabIndex = 13;
+            btnBatal.Text = "Batal / Clear";
+            btnBatal.UseVisualStyleBackColor = false;
+            btnBatal.Click += btnTutup_Click;
             // 
             // FormBarang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(txtIdbarang);
-            Controls.Add(lblid);
-            Controls.Add(dataGridView1);
-            Controls.Add(btnTutup);
-            Controls.Add(btnDelete);
+            BackColor = Color.White;
+            ClientSize = new Size(882, 553);
+            Controls.Add(btnBatal);
+            Controls.Add(btnHapus);
             Controls.Add(btnEdit);
             Controls.Add(btnSimpan);
             Controls.Add(txtStock);
+            Controls.Add(label4);
             Controls.Add(txtHarga);
+            Controls.Add(label3);
             Controls.Add(txtNamaBarang);
-            Controls.Add(lblStock);
-            Controls.Add(lblHarga);
-            Controls.Add(lblNamaBarang);
+            Controls.Add(label2);
+            Controls.Add(txtIdbarang);
+            Controls.Add(label1);
+            Controls.Add(dataGridView1);
+            Controls.Add(pnlHeader);
             Name = "FormBarang";
-            Text = "Form Barang";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Manajemen Barang";
             Load += FormBarang_Load;
+            pnlHeader.ResumeLayout(false);
+            pnlHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -187,20 +248,20 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private Label LblIdBarang;
-        private Label lblNamaBarang;
-        private Label lblHarga;
-        private Label lblStock;
+        private Panel pnlHeader;
+        private Label lblHeaderTitle;
+        private DataGridView dataGridView1;
+        private Label label1;
+        private TextBox txtIdbarang;
         private TextBox txtNamaBarang;
+        private Label label2;
         private TextBox txtHarga;
+        private Label label3;
         private TextBox txtStock;
+        private Label label4;
         private Button btnSimpan;
         private Button btnEdit;
-        private Button btnDelete;
-        private Button btnTutup;
-        private DataGridView dataGridView1;
-        private Label lblid;
-        private TextBox txtIdbarang;
+        private Button btnHapus;
+        private Button btnBatal;
     }
 }
