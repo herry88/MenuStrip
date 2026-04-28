@@ -5,6 +5,12 @@ namespace MenuStrip
         public Form1()
         {
             InitializeComponent();
+            this.Activated += Form1_Activated;
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            UpdateDashboardStats();
         }
 
         private void dataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,11 +47,33 @@ namespace MenuStrip
 
         private void UpdateDashboardStats()
         {
-            // Placeholder stats - bisa dikembangkan dengan query database asli
-            lblCountBarang.Text = "35"; 
-            lblCountPelanggan.Text = "18";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=cobasqlserver;Integrated Security=True;TrustServerCertificate=True"))
+                {
+                    conn.Open();
+
+                    // Count Barang
+                    SqlCommand cmdBarang = new SqlCommand("SELECT COUNT(*) FROM Barang", conn);
+                    int countBarang = (int)cmdBarang.ExecuteScalar();
+                    lblCountBarang.Text = countBarang.ToString();
+
+                    // Count Pelanggan
+                    SqlCommand cmdPelanggan = new SqlCommand("SELECT COUNT(*) FROM Pelanggan", conn);
+                    int countPelanggan = (int)cmdPelanggan.ExecuteScalar();
+                    lblCountPelanggan.Text = countPelanggan.ToString();
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Jika database belum siap, tampilkan 0
+                lblCountBarang.Text = "0";
+                lblCountPelanggan.Text = "0";
+                lblStatus.Text = "Gagal memuat statistik: " + ex.Message;
+            }
             
-            // Memberikan sedikit efek visual pada load
             pnlCardBarang.Cursor = Cursors.Hand;
             pnlCardPelanggan.Cursor = Cursors.Hand;
         }
