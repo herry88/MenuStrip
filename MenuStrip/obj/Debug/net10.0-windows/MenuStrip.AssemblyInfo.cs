@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MenuStrip")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbb2f646837f397f1ce42b366acc787a54a017d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a849958cf1f106fa3d9ebfa4d1411482a2372649")]
 [assembly: System.Reflection.AssemblyProductAttribute("MenuStrip")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MenuStrip")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
