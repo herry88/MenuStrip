@@ -1,3 +1,6 @@
+using System.Data;
+using Microsoft.Data.SqlClient;
+
 namespace MenuStrip
 {
     public partial class Form1 : Form
@@ -73,7 +76,7 @@ namespace MenuStrip
                 lblCountPelanggan.Text = "0";
                 lblStatus.Text = "Gagal memuat statistik: " + ex.Message;
             }
-            
+
             pnlCardBarang.Cursor = Cursors.Hand;
             pnlCardPelanggan.Cursor = Cursors.Hand;
         }
