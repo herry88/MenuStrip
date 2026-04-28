@@ -54,3 +54,4 @@ D:\BELAJARC#\MenuStrip\MenuStrip\bin\Debug\net10.0-windows\runtimes\win-x64\nati
 D:\BELAJARC#\MenuStrip\MenuStrip\bin\Debug\net10.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 D:\BELAJARC#\MenuStrip\MenuStrip\obj\Debug\net10.0-windows\MenuStrip.csproj.AssemblyReference.cache
 D:\BELAJARC#\MenuStrip\MenuStrip\obj\Debug\net10.0-windows\MenuStrip.csproj.Up2Date
+D:\BELAJARC#\MenuStrip\MenuStrip\obj\Debug\net10.0-windows\MenuStrip.sourcelink.json
